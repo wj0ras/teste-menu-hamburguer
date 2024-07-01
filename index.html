@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parobé WebGIS - GAUSS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body {
+            background-image: url('./img/vetoratualizado.svg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        } 
+
+        header {
+            background-color: white;
+            z-index: 1000;
+        }
+         
+        main {
+            z-index: 100;
+        }
+
+        footer {
+            background-image: url('./img/parobe-footer.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #button-card {
+            background-color: #EF8700;
+        }
+
+        #button-card:hover {
+            background-color: #a05e07;
+        }
+
+        #title-prefe {
+            color: white;
+        }
+
+        #card {
+            background-color: #dfebf1;
+            color: rgb(0, 0, 0);
+        }
+
+        .img-pref {
+            width: 100%; 
+            height: 150px;
+            background-image: url('./img/parobe.png');
+            background-size: cover;
+            background-position: center center; 
+            z-index: 10;
+        }
+
+        h1, h5, p {
+            font-family: "Open Sans", sans-serif;
+        }
+
+        #z {
+            z-index: -1;
+        }
+
+        #menu-responsivo {
+            position: absolute;
+            width: 100%;
+            top: 40px;
+            height: 0px;
+            z-index: 100;
+            visibility: hidden;
+            backdrop-filter: blur(10px);
+            transition: 0.5s;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        
+        #menu ul li{
+            background-color: #ef8700;
+            border-radius: 5px;
+            
+        }
+        #menu ul li a{
+            padding: 5px;
+            text-align: center;
+        }
+
+        #menu-responsivo ul  {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #menu-responsivo ul li  {
+           width: 100%;
+           background-color: #ef8700;
+           border-radius: 5px;
+           text-align: center;
+           padding: 10px;
+           color: #ffffff;
+        }
+
+        #menu-responsivo ul li a {
+           font-size: 1.5em;
+           width: 100%;
+           height: 100%;
+        }
+
+        #img-menu.open-img-menu {
+            background-color: #130b002f;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .div-auxiliar {
+                display: none;
+            }        
+            
+        #menu-responsivo.open-menu {
+            visibility: visible;
+            height: calc(80vh - 40px);
+            transition: 0.5s; 
+        } 
+        }
+    </style>
+</head>
+<body class="h-screen">
+
+<div class="flex flex-col items-center justify-between h-screen">
+
+        <!-- HEADER -->     
+        <header class="w-full flex flex-col justify-center shadow-md relative">
+            <div class="flex justify-between items-center px-4">
+                <div class="hidden md:block"></div>
+                <div>
+                    <img src="./img/logo_webgis.svg" class="w-20 my-2">
+                </div>
+                <div id="menu" class="flex flex-row items-center">
+                    <ul class="hidden md:flex flex-row gap-4">
+                        <li class=""><a class="px-3 py-2 text-sm font-medium text-center text-white  rounded-lg" href="#">Entrar</a></li>
+                        <li class=""><a class="px-3 py-2 text-sm font-medium text-center text-white  rounded-lg" href="#">Registrar-se</a></li>
+                    </ul>
+                    <div id="img-menu" class="">
+                        <button onclick="openMenu()"  class="md:hidden flex items-center"><a href="#"><img  src="img/menu-hamburguer.svg" class="w-8"></a></button>
+                    </div>
+                    
+                </div>
+            </div>
+            <div id="menu-responsivo">
+                <ul>
+                    <li ><a href="google.com">Entrar</a></li>
+                    <li ><a href="google.com">Registrar-se</a></li>
+                </ul>
+            </div>
+            <div class="img-pref flex justify-center py-4">
+                <div class="w-auto flex items-center">
+                    <img src="./img/parobe-logo-pref.png" class="w-20 nofil" alt="">
+                </div>
+                <div class="w-auto flex items-center">
+                    <h1 id="title-prefe" class="text-xl nofil">Prefeitura de<br><span class="text-5xl">Parobé</span></h1>
+                </div>
+            </div>
+            <img src="./img/mapa_globo_preto.svg" class="w-40 lg:block absolute top-44 left-0 opacity-50 hidden" alt="">
+            <img src="./img/monitor_mapa.svg" class="w-40 lg:block absolute top-44 right-0 opacity-50 hidden" alt="">
+        </header>
+        
+
+         <!-- CARDS --> 
+        <main class="py-1 w-full">
+
+            <div class="title w-full flex justify-center my-1">
+                <h1 class="text-2xl font-medium ">PORTAL DE MAPAS</h1>
+            </div>
+
+            <div class="content-subtitle w-full flex justify-center p-2 my-2">
+                <p class="text-base text-center w-4/5 ">
+            Aqui você encontra mapas digitais, banco de dados, gráficos e informações georreferenciadas do município sobre os mais diversos assuntos.
+                </p>
+            </div>
+    
+            <div class="cards flex justify-center my-3">
+                <div class=" w-full xl:max-w-max flex flex-wrap justify-evenly gap-4 ">
+                    <div id="card" class="flex flex-col justify-between max-w-xs p-4 rounded-lg shadow-2xl">
+                        <div>
+                            <img src="./img/enchente.svg" class="w-16 h-16 mb-3 mx-auto " alt="">
+                            <h5 class="mb-2 text-lg tracking-tight ">MAPEAMENTO DA ENCHENTE E ZONAS AFETADAS</h5>
+                           
+                            <p class="mb-3 font-normal text-sm">Aqui encontra-se o mapeamento da área urbana da cidade, com foco nas regiões afetadas pelas enchentes, com um conjunto importante de camadas geográficas.</p>
+                        </div>
+                       
+                        <div>
+                            <a href="#" id="button-card" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800  focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Visitar página
+                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                
+                    
+                    <div id="card" class="flex flex-col justify-between max-w-xs p-4 rounded-lg shadow-2xl">
+                        <div>
+                            <img src="./img/map-svgrepo-com_bairro.svg" class="w-16 h-16 mx-auto   mb-3" alt="">
+                            <h5 class="mb-2 text-lg tracking-tight ">REGIÕES DE RISCO</h5>
+                           
+                            <p class="mb-3 font-normal text-sm">Local com mapeamento de pontos correspondente a poços artesianos, casas com estrutura comprometida, riscos de deslizamento, apontando para rotas no Google Maps.</p>
+                        </div>
+                        <div>
+                            <a target="_blank" href="https://www.google.com/maps/d/u/0/viewer?mid=1TvOYolOxXk3t_-ok5tEyNg7lyZePY3w&g_ep=CAESCjExLjEzMS4xMDIYACDdYipsLDk0MjIyMzUzLDk0MjIzMjk5LDk0MjE2NDEzLDk0MjEyNDk2LDk0MjA3Mzg4LDk0MjA3NTA2LDk0MjA4NTA2LDk0MjE3NTIzLDk0MjE4NjUzLDQ3MDg3MTE4LDQ3MDg0MzkzLDk0MjEzMjAwQgJCUg%3D%3D&shorturl=1&ll=-29.514067184198932%2C-51.9919733400454&z=16" id="button-card" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white  rounded-lg">
+                                Visitar página
+                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+    
+        </main>
+
+     <!-- FOOTER --> 
+    <footer class="w-full flex flex-col sm:flex-row justify-center flex-wrap relative">
+        <div class="basis-1/4 flex justify-center items-center">
+            <a href="https://www.gaussgeo.com.br/"> <img src="./img/logo_gauss.svg" class="w-36 h-20 " alt="logo-gauss"></a>
+        </div>
+    </footer>
+        
+</div>
+<script>
+    const menuResponsivo = document.getElementById('menu-responsivo')
+const imgMenu = document.getElementById('img-menu')
+
+function openMenu() {
+    if(!menuResponsivo.classList.contains('open-menu')) {
+        menuResponsivo.classList.add('open-menu')
+        imgMenu.classList.add('open-img-menu')
+    }
+    else {
+        menuResponsivo.classList.remove('open-menu')
+        imgMenu.classList.remove('open-img-menu')
+    }
+} 
+</script>
+</body>
+</html>
